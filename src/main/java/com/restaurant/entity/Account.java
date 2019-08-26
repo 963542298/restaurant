@@ -4,6 +4,7 @@ package com.restaurant.entity;
  * 账号实体类
  */
 public class Account {
+
     private Integer accountid;
 
     private String accountname;

@@ -1,164 +1,47 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.restaurant.mapper.OrdersMapper" >
+
   <resultMap id="BaseResultMap" type="com.restaurant.entity.Orders" >
-    <result column="orderId" property="orderid" jdbcType="INTEGER" />
-    <result column="orderCode" property="ordercode" jdbcType="VARCHAR" />
-    <result column="orderTime" property="ordertime" jdbcType="DATE" />
-    <result column="orderState" property="orderstate" jdbcType="INTEGER" />
+    <id column="orderId" property="orderid"/>
+    <result column="orderCode" property="ordercode"/>
+    <result column="orderTime" property="ordertime"/>
+    <result column="orderState" property="orderstate"/>
+    <collection property="detailsList" ofType="Details">
+      <id property="detailsid" column="detailsid"/>
+      <result property="num" column="num"/>
+      <association property="food" javaType="Food">
+        <id property="foodid" column="foodid"/>
+        <result property="foodname" column="foodname"/>
+        <result property="foodstate" column="foodstate"/>
+        <association property="type" javaType="Type">
+          <id property="typeid" column="typeid"/>
+          <result property="typename" column="typename"/>
+        </association>
+      </association>
+    </collection>
   </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
+
+
+  <select id="queryAllOrders" resultMap="BaseResultMap">
+    SELECT orderid,ordercode,ordertime,orderstate,
+    detailsid,num,
+    foodid,foodname,foodpath,foodstate,
+    typeid,typename
+    FROM orders o
+    LEFT JOIN details d
+    ON d.orderId = o.orderId
+    LEFT JOIN food f
+    ON f.foodId = d.foodId
+    left join type t
+    on  t.typeid = f.typeid
+    <where>
+      <if test='orders.ordercode != null'>
+        and o.ordercode like '%'#{orders.ordercode}'%'
+      </if>
     </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List" >
-    orderId, orderCode, orderTime, orderState
-  </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.restaurant.entity.OrdersExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from orders
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.restaurant.entity.OrdersExample" >
-    delete from orders
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.restaurant.entity.Orders" >
-    insert into orders (orderId, orderCode, orderTime, 
-      orderState)
-    values (#{orderid,jdbcType=INTEGER}, #{ordercode,jdbcType=VARCHAR}, #{ordertime,jdbcType=DATE}, 
-      #{orderstate,jdbcType=INTEGER})
-  </insert>
-  <insert id="insertSelective" parameterType="com.restaurant.entity.Orders" >
-    insert into orders
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="orderid != null" >
-        orderId,
-      </if>
-      <if test="ordercode != null" >
-        orderCode,
-      </if>
-      <if test="ordertime != null" >
-        orderTime,
-      </if>
-      <if test="orderstate != null" >
-        orderState,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="orderid != null" >
-        #{orderid,jdbcType=INTEGER},
-      </if>
-      <if test="ordercode != null" >
-        #{ordercode,jdbcType=VARCHAR},
-      </if>
-      <if test="ordertime != null" >
-        #{ordertime,jdbcType=DATE},
-      </if>
-      <if test="orderstate != null" >
-        #{orderstate,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.restaurant.entity.OrdersExample" resultType="java.lang.Integer" >
-    select count(*) from orders
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update orders
-    <set >
-      <if test="record.orderid != null" >
-        orderId = #{record.orderid,jdbcType=INTEGER},
-      </if>
-      <if test="record.ordercode != null" >
-        orderCode = #{record.ordercode,jdbcType=VARCHAR},
-      </if>
-      <if test="record.ordertime != null" >
-        orderTime = #{record.ordertime,jdbcType=DATE},
-      </if>
-      <if test="record.orderstate != null" >
-        orderState = #{record.orderstate,jdbcType=INTEGER},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update orders
-    set orderId = #{record.orderid,jdbcType=INTEGER},
-      orderCode = #{record.ordercode,jdbcType=VARCHAR},
-      orderTime = #{record.ordertime,jdbcType=DATE},
-      orderState = #{record.orderstate,jdbcType=INTEGER}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
+
+
+
 </mapper>

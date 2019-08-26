@@ -37,6 +37,7 @@
       </foreach>
     </where>
   </sql>
+
   <sql id="Update_By_Example_Where_Clause" >
     <where >
       <foreach collection="example.oredCriteria" item="criteria" separator="or" >
@@ -66,9 +67,11 @@
       </foreach>
     </where>
   </sql>
+
   <sql id="Base_Column_List" >
     accountId, accountName, accountPwd, role, userId
   </sql>
+
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.restaurant.entity.AccountExample" >
     select
     <if test="distinct" >
@@ -83,6 +86,7 @@
       order by ${orderByClause}
     </if>
   </select>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -93,12 +97,14 @@
     delete from account
     where accountId = #{accountid,jdbcType=INTEGER}
   </delete>
+
   <delete id="deleteByExample" parameterType="com.restaurant.entity.AccountExample" >
     delete from account
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
+
   <insert id="insert" parameterType="com.restaurant.entity.Account" >
     insert into account (accountId, accountName, accountPwd, 
       role, userId)
