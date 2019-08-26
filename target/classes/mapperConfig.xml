@@ -20,7 +20,12 @@
     <!-- 定义配置文件中需要的所有别名 -->
     <typeAliases>
         <!-- 批量扫描别名 -->
-        <package name="ssm.entity"></package>
+        <package name="com.restaurant.entity"></package>
     </typeAliases>
+
+    <!-- 批量扫描 -->
+    <mappers>
+        <package name="com.restaurant.mapper"/>
+    </mappers>
 
 </configuration>

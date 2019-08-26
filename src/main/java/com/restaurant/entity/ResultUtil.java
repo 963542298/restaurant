@@ -2,7 +2,7 @@ package com.restaurant.entity;
 
 public class ResultUtil {
 
-    private Integer code;
+    private int code;
     private String message;
     private Object data;
 
@@ -18,11 +18,11 @@ public class ResultUtil {
     public ResultUtil() {
     }
 
-    public Integer getCode() {
+    public int getCode() {
         return code;
     }
 
-    public ResultUtil setCode(Integer code) {
+    public ResultUtil setCode(int code) {
         this.code = code;
         return this;
     }

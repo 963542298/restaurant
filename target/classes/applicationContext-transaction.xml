@@ -37,6 +37,6 @@
     <!-- 配置事务的切面 -->
     <aop:config>
         <aop:advisor advice-ref="txAdvice"
-                     pointcut="execution(* ssm.service.impl.*.*(..))"/>
+                     pointcut="execution(* com.restaurant.service.impl.*.*(..))"/>
     </aop:config>
 </beans>

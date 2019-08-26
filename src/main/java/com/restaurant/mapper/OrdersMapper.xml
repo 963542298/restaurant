@@ -23,25 +23,9 @@
   </resultMap>
 
 
-  <select id="queryAllOrders" resultMap="BaseResultMap">
-    SELECT orderid,ordercode,ordertime,orderstate,
-    detailsid,num,
-    foodid,foodname,foodpath,foodstate,
-    typeid,typename
+  <select id="queryAllOrders" resultType="Orders">
+    SELECT o.orderid,ordercode,ordertime,orderstate
     FROM orders o
-    LEFT JOIN details d
-    ON d.orderId = o.orderId
-    LEFT JOIN food f
-    ON f.foodId = d.foodId
-    left join type t
-    on  t.typeid = f.typeid
-    <where>
-      <if test='orders.ordercode != null'>
-        and o.ordercode like '%'#{orders.ordercode}'%'
-      </if>
-    </where>
   </select>
-
-
 
 </mapper>

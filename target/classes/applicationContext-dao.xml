@@ -10,7 +10,7 @@
     <!-- 让spring 批量加载mapper代理对象 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!-- 批量加载的包 -->
-        <property name="basePackage" value="ssm.mapper"/>
+        <property name="basePackage" value="com.restaurant.mapper"/>
         <!-- sqlSession -->
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
