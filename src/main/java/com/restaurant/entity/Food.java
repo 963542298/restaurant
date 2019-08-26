@@ -4,15 +4,28 @@ package com.restaurant.entity;
  * 菜品类
  */
 public class Food {
+
+    //菜品id
     private Integer foodid;
-
+    //菜品名
     private String foodname;
-
+    //菜品图片路径
     private String foodpath;
-
-    private Integer typeid;
-
+    //菜品类型
+    private Type type;
+    //菜品状态
     private Integer foodstate;
+
+    public Food() {
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
 
     public Integer getFoodid() {
         return foodid;
@@ -36,14 +49,6 @@ public class Food {
 
     public void setFoodpath(String foodpath) {
         this.foodpath = foodpath == null ? null : foodpath.trim();
-    }
-
-    public Integer getTypeid() {
-        return typeid;
-    }
-
-    public void setTypeid(Integer typeid) {
-        this.typeid = typeid;
     }
 
     public Integer getFoodstate() {
