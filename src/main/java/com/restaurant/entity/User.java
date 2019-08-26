@@ -2,6 +2,9 @@ package com.restaurant.entity;
 
 import java.util.Date;
 
+/**
+ * 用户信息类
+ */
 public class User {
     private Integer userid;
 

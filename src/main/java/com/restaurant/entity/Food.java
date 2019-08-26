@@ -1,5 +1,8 @@
 package com.restaurant.entity;
 
+/**
+ * 菜品类
+ */
 public class Food {
     private Integer foodid;
 

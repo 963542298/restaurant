@@ -1,5 +1,8 @@
 package com.restaurant.entity;
 
+/**
+ * 菜品信息类
+ */
 public class Type {
     private Integer typeid;
 
