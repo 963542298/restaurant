@@ -1,7 +1,7 @@
 package com.restaurant.entity;
 
 /**
- * 账号实体类1
+ * 账号实体类2
  */
 public class Account {
     private Integer accountid;
