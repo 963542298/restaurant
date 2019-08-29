@@ -2,18 +2,42 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.restaurant.mapper.FoodMapper" >
 
-  <resultMap id="BaseResultMap" type="com.restaurant.entity.Food" >
-    <id column="foodId" property="foodid"/>
-    <result column="foodName" property="foodname"/>
-    <result column="foodPath" property="foodpath"/>
-    <association property="type" javaType="Type">
-      <id column="typeid" property="typeid"/>
-      <result column="typename" property="typename"/>
-    </association>
-    <result column="foodState" property="foodstate"/>
-  </resultMap>
+<resultMap id="showAllFoodMap" type="Food">
+  <id column="foodid" property="foodid"/>
+  <result column="foodname" property="foodname"/>
+  <result column="foodstate" property="foodstate"/>
+  <association property="type" javaType="Type">
+    <id column="typeid" property="typeid"/>
+    <result column="typename" property="typename"/>
+  </association>
+</resultMap>
 
-  <select id="showAllFood" resultType="Food">
-    select * from food
+    <insert id="addFood">
+        insert into food(foodname,foodpath,typeid,foodstate)
+        values(#{foodname},#{foodpath},#{type.typeid},#{foodstate})
+    </insert>
+
+    <update id="updateFoodState">
+        update food set foodstate = #{foodstate} where foodid = #{foodid}
+    </update>
+
+    <delete id="deleteFood">
+        delete from food where foodid = #{foodid}
+    </delete>
+
+    <select id="showAllFood" resultMap="showAllFoodMap">
+    select foodid,foodname,foodstate,typename,t.typeid
+    from food f left join type t on f.typeid=t.typeid
+    <where>
+        <if test="foodname != null and foodname != ''">
+          and foodname like #{foodname}
+        </if>
+        <if test="foodstate != null and foodstate != -1">
+          and foodstate = #{foodstate}
+        </if>
+        <if test="type.typeid != null and type.typeid != -1">
+          and t.typeid = #{type.typeid}
+        </if>
+    </where>
   </select>
 </mapper>
