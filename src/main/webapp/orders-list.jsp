@@ -22,25 +22,22 @@
     <link rel="stylesheet" href="./css/xadmin.css">
 
     <!-- js -->
-    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="lib/layui/layui.js"></script>
     <script type="text/javascript" src="js/vue.js"></script>
-    <script type="text/javascript" src="js/orders.js"></script>
+    <script type="text/javascript" src="js/orders-list.js"></script>
 </head>
 <body>
 <div id="app">
     <blockquote class="layui-elem-quote news_search">
         <div class="layui-inline">
             <div class="layui-input-inline">
-                <input type="text" value="" placeholder="请输入关键字" class="layui-input search_input">
+                <input id="ordercode" type="text" id="ordercode" placeholder="请输入订单编号" class="layui-input search_input">
             </div>
-            <a class="layui-btn search_btn">查询</a>
-            <a class="layui-btn reset_btn"><i class="layui-icon">&#xe666;</i>重置</a>
-        </div>
-        <div class="layui-inline">
-            <div class="layui-form-mid layui-word-aux"></div>
-        </div>
+            <button id="query" class="layui-btn search_btn">查询</button>
 
+            <button id="reset" class="layui-btn reset_btn"><i class="layui-icon">&#xe666;</i>重置</button>
+        </div>
     </blockquote>
     <div class="layui-form links_list">
         <table class="layui-table">
@@ -64,7 +61,7 @@
                     <td>{{orders.ordercode}}</td>
                     <td>{{orders.ordertime}}</td>
                     <td>
-                        <button class="layui-btn" @click="findDetailsByOrdersId(orders.ordersid)">查看订单详情</button>
+                        <button class="layui-btn" @click="findDetailsByOrdersId(orders.orderid)">查看订单详情</button>
                     </td>
                 </tr>
             </template>
@@ -72,9 +69,9 @@
         </table>
     </div>
 </div>
-
 <center>
     <div id="laypage"></div>
 </center>
+
 </body>
 </html>

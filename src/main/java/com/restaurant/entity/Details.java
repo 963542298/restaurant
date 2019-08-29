@@ -1,9 +1,11 @@
 package com.restaurant.entity;
 
+import java.io.Serializable;
+
 /**
  * 订单详情类
  */
-public class Details {
+public class Details implements Serializable {
 
     //订单详情id
     private Integer detailsid;

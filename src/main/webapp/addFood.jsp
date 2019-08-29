@@ -18,10 +18,10 @@
     <link rel="stylesheet" href="./css/font.css">
     <link rel="stylesheet" href="./css/xadmin.css">
 
-    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="lib/layui/layui.all.js"></script>
     <script type="text/javascript" src="js/vue.js"></script>
-    <script type="text/javascript" src="js/addFood.js"></script>
+<%--    <script type="text/javascript" src="js/addFood.js"></script>--%>
 </head>
 <body>
     <div id="addFoodApp">
@@ -71,4 +71,37 @@
         </form>
     </div>
 </body>
+<script>
+    layui.use(['form', 'layer','upload'], function() {
+        var form = layui.form,
+            layer = parent.layer === undefined ? layui.layer : parent.layer,
+            upload = layui.upload;
+        //图片上传
+        upload.render({
+            elem: '#test8'
+            , url: 'addFood.action'
+            , auto: false
+            //,multiple: true
+            , bindAction: '#test9'
+            , done: function (result) {//获取响应的回调
+                console.log(result)
+                // 如果上传失败
+                if (result.code != 0) {
+                    return layer.msg('上传失败');
+                } else {
+                    //上传成功
+                    return layer.msg('上传成功');
+                }
+            }
+            , error: function () {//错误回调
+                // 演示失败状态，并实现重传
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function () {
+                    uploadInst.upload();
+                });
+            }
+        });
+    })
+</script>
 </html>

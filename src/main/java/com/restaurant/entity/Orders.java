@@ -1,12 +1,13 @@
 package com.restaurant.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 /**
  * 订单类
  */
-public class Orders {
+public class Orders implements Serializable {
 
     //订单id
     private Integer orderid;

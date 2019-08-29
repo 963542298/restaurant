@@ -1,21 +1,32 @@
 package com.restaurant.service;
 
+import com.github.pagehelper.PageInfo;
 import com.restaurant.entity.Orders;
+import com.restaurant.entity.WrapperUtil;
+import org.apache.ibatis.annotations.Select;
 
-import java.util.List;
 
 public interface IOrdersService {
 
     /**
      * 添加订单 单个
-     * @param orders 订单
      * @return 返回影响行数
      */
-    int addOrders(Orders orders);
+    int addOrders(Orders orders,WrapperUtil wrapperUtil);
 
     /**
-     * 查询所有的订单
+     * 模糊查询订单
+     * @param ordercode 订单编号
+     * @param page 当前页号
+     * @param pageSize 页面大小
      * @return
      */
-    List<Orders> queryAllOrders();
+    PageInfo<Orders> queryAllOrders(String ordercode, Integer page, Integer pageSize);
+
+    /**
+     * 通过订单编号查询订单id
+     * @param ordercode
+     * @return
+     */
+    int getOrdersByOrdercode(String ordercode);
 }

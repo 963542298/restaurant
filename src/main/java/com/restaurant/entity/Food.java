@@ -1,9 +1,11 @@
 package com.restaurant.entity;
 
+import java.io.Serializable;
+
 /**
  * 菜品类
  */
-public class Food {
+public class Food implements Serializable {
 
     //菜品id
     private Integer foodid;

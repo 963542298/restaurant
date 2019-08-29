@@ -2,17 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.restaurant.mapper.FoodMapper" >
 
-  <resultMap id="BaseResultMap" type="com.restaurant.entity.Food" >
-    <id column="foodId" property="foodid"/>
-    <result column="foodName" property="foodname"/>
-    <result column="foodPath" property="foodpath"/>
-    <association property="type" javaType="Type">
-      <id column="typeid" property="typeid"/>
-      <result column="typename" property="typename"/>
-    </association>
-    <result column="foodState" property="foodstate"/>
-  </resultMap>
-
   <select id="showAllFood" resultType="Food">
     select * from food
   </select>

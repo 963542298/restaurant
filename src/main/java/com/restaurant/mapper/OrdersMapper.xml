@@ -24,8 +24,13 @@
 
 
   <select id="queryAllOrders" resultType="Orders">
-    SELECT o.orderid,ordercode,ordertime,orderstate
-    FROM orders o
+    SELECT orderid,ordercode,ordertime,orderstate
+    FROM orders
+    <where>
+      <if test="ordercode != null">
+        and ordercode like #{ordercode}
+      </if>
+    </where>
   </select>
 
 </mapper>

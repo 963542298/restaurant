@@ -1,9 +1,11 @@
 package com.restaurant.entity;
 
+import java.io.Serializable;
+
 /**
  * 菜品信息类
  */
-public class Type {
+public class Type implements Serializable {
     private Integer typeid;
 
     private String typename;

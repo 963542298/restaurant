@@ -4,6 +4,18 @@ layui.use(['form', 'layer','upload'], function() {
         layer = parent.layer === undefined ? layui.layer : parent.layer,
         upload = layui.upload;
 
+    // //创建VueApp
+    // var app = new Vue({
+    //     el: "#addFoodApp", //app作用域
+    //     data: {
+    //     },
+    //     methods: { //定义VUE中函数
+    //     },
+    //     created: function () {//创建时加载
+    //         loadTypeList();
+    //     }
+    // })
+
     //图片上传
     upload.render({
         elem: '#test8'
@@ -31,19 +43,7 @@ layui.use(['form', 'layer','upload'], function() {
         }
     });
 
-    //创建VueApp
-    var app = new Vue({
-        el: "#addFoodApp", //app作用域
-        data: {
 
-        },
-        methods: { //定义VUE中函数
-
-        },
-        created: function () {//创建时加载
-            loadTypeList();
-        }
-    })
 
     /**
      * 点击事件(添加按钮)

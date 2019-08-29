@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-//@CrossOrigin(origins = {"/*", "null"})
+//@CrossOrigin(origins = {"*", "null"})
 @Controller
 public class DetailsController {
 

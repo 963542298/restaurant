@@ -1,11 +1,12 @@
 package com.restaurant.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 用户信息类
  */
-public class User {
+public class User implements Serializable {
     private Integer userid;
 
     private String username;

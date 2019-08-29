@@ -10,21 +10,19 @@ layui.use(['form', 'layer', 'laypage'], function() {
             list:{}
         },
         methods: { //定义VUE中函数
-            findDetailsByOrdersId:function(ordersid){
-                findDetailsByOrdersId(ordersid);
-            }
+
 
         },
         created: function () {//创建时加载
-            getOrderAll()
+            showAllFood()
         }
     })
 
     /**
      * 查询订单
      */
-    function getOrderAll(){
-        $.post("http://127.0.0.1:8080/restaurant/orders/queryAll.action",function (result){
+    function showAllFood(){
+        $.post("http://localhost:8080/restaurant/food/showAllFood.action",function (result){
             console.log(result)
             if(result.code == 0){//查询成功
                 app.list = result.data;
@@ -32,10 +30,4 @@ layui.use(['form', 'layer', 'laypage'], function() {
         })
     }
 
-    /**
-     * 查询单个订单详情
-     */
-    function findDetailsByOrdersId(ordersid) {
-        $.post("http://127.0.0.1:8080/restaurant/")
-    }
 })

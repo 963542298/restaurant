@@ -18,9 +18,10 @@
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="lib/layui/layui.js"></script>
     <script type="text/javascript" src="js/vue.js"></script>
+    <script type="text/javascript" src="js/food-list.js"></script>
 </head>
 <body>
-    <div class="app">
+    <div id="app">
         <div class="layui-card">
             <div class="layui-card-body">
                 <form class="layui-form">

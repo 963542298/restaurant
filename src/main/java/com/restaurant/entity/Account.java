@@ -1,9 +1,11 @@
 package com.restaurant.entity;
 
+import java.io.Serializable;
+
 /**
  * 账号实体类
  */
-public class Account {
+public class Account implements Serializable {
 
     private Integer accountid;
 
