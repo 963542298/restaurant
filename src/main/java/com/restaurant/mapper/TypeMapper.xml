@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.restaurant.mapper.TypeMapper" >
-  <resultMap id="BaseResultMap" type="com.restaurant.entity.Type" >
-    <id column="typeId" property="typeid" jdbcType="INTEGER" />
-    <result column="typeName" property="typename" jdbcType="VARCHAR" />
-    <result column="typeState" property="typestate" jdbcType="INTEGER" />
-  </resultMap>
+
+  <insert id="addType">
+    insert into type(typename,typestate)
+    values(#{typename},0)
+  </insert>
+
+  <select id="showAllType" resultType="Type">
+    select * from type
+  </select>
+
+
 
 </mapper>
