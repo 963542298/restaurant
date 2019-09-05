@@ -16,6 +16,7 @@ public interface ITypeService {
      */
     Integer addType(String typename);
 
+
     /**
      *查询所有菜品名称
      * @return
@@ -27,4 +28,5 @@ public interface ITypeService {
      * @return
      */
     List<Type> findTypeAndFood();
+
 }

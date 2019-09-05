@@ -5,6 +5,11 @@ import com.restaurant.entity.Type;
 import com.restaurant.mapper.TypeMapper;
 import com.restaurant.service.ITypeService;
 import org.junit.Test;
+
+import com.restaurant.entity.Type;
+import com.restaurant.mapper.TypeMapper;
+import com.restaurant.service.ITypeService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +36,7 @@ public class TypeService implements ITypeService {
         return typeMapper.addType(typename);
     }
 
+
     /**
      * 查询所有菜品名称
      * @return
@@ -46,4 +52,5 @@ public class TypeService implements ITypeService {
     public List<Type> findTypeAndFood(){
         return  typeMapper.findTypeAndFood();
     }
+
 }
