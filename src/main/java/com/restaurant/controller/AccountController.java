@@ -2,6 +2,11 @@ package com.restaurant.controller;
 
 import com.restaurant.entity.Account;
 import org.apache.bval.Validate;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.UnauthorizedException;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import com.restaurant.service.IAccountService;
@@ -22,7 +27,6 @@ public class AccountController {
     @RequestMapping("/login.action")
     public String login( Model model,@Validate Account account,BindingResult br){
 
-
         if(br.hasErrors()){
             //有错误
             FieldError uerror = br.getFieldError("accountname");
@@ -37,7 +41,30 @@ public class AccountController {
                 return "login2.jsp";
             }else{
                 //没有错误
-                return "index.jsp";
+                //创建一个认证主体
+                Subject currentUser = SecurityUtils.getSubject();
+                //
+                UsernamePasswordToken token = new UsernamePasswordToken
+                        (account.getAccountname(), account.getAccountpwd());
+
+                try{
+                    //判断当前用户是否可以的管理
+                    currentUser.login(token);
+                }catch(AuthenticationException e ){
+                    //如果主体在认证的时候遇到了异常就说明登录没有成功
+                    e.printStackTrace();
+                    System.out.println("登陆失败");
+                    return "/login.jsp";
+                }
+
+                try{
+                    //检测角色
+                    currentUser.checkRole("1");
+                    return "/admin/index.jsp";
+                }catch(UnauthorizedException e){
+                    //如果角色不足抛异常
+                    return "/staff/head.jsp";
+                }
             }
        }
     }

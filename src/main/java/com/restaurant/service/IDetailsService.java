@@ -1,9 +1,6 @@
 package com.restaurant.service;
 
-import com.restaurant.entity.Details;
-import com.restaurant.entity.Food;
-import com.restaurant.entity.Orders;
-import com.restaurant.entity.WrapperUtil;
+import com.restaurant.entity.*;
 
 import java.util.List;
 
@@ -24,4 +21,21 @@ public interface IDetailsService {
      * @return
      */
     int addDetails(WrapperUtil wrapperUtil);
+
+    /**
+     * 查询所有订单
+     * @return
+     */
+    List<DetailsEmp> findAllDetails(String time);
+    /**
+     * 查询今日完成了的订单
+     * @return
+     */
+    List<DetailsEmp> findFinishDetails(String time);
+
+    /**
+     * 修改详情状态
+     * @param detailsId
+     */
+    int editDetailsState(int detailsId);
 }

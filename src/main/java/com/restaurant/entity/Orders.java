@@ -1,5 +1,8 @@
 package com.restaurant.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -14,6 +17,8 @@ public class Orders implements Serializable {
     //订单编号
     private String ordercode;
     //订单时间
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date ordertime;
     //订单状态
     private Integer orderstate;

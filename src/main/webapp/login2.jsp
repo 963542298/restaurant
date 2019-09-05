@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
@@ -13,7 +14,7 @@
 	<link rel="stylesheet" href="lib/layui/css/layui.css">
 	<link rel="stylesheet" href="css/login2.css">
 	<script type="text/javascript" src="lib/layui/layui.js"></script>
-	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/ajaxutil.js"></script>
 	<!--		<script type="text/javascript" src="js/login.js"></script>-->
 
@@ -37,7 +38,7 @@
 		<div class="layui-input-inline" style="color: red;text-align: center;">
 			${msg }
 		</div>
-		<form class="layui-form" action="login.action">
+		<form class="layui-form" action="login.action" method="post">
 			<div>
 				<i class="layui-icon layui-icon-username admin-icon admin-icon-username"></i>
 				<input type="text" name="accountname" placeholder="请输入帐号" lay-verify="required" autocomplete="off" class="layui-input admin-input admin-input-username">

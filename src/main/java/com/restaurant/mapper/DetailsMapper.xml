@@ -19,9 +19,9 @@
     </resultMap>
 
     <insert id="addDetails">
-        insert into details(orderid,foodid,num) values
+        insert into details(orderid,foodid,num,detailsState) values
         <foreach collection="foodUtilList" item="foodUtil" open="(" separator="),(" close=")">
-            #{orderid},#{foodUtil.foodid},#{foodUtil.num}
+            #{orderid},#{foodUtil.foodid},#{foodUtil.num},1
         </foreach>
 
     </insert>
@@ -37,5 +37,34 @@
         on t.typeid = f.typeid
         where d.orderid = #{value}
     </select>
+    <resultMap id="DetailsResultMap" type="com.restaurant.entity.DetailsEmp">
+        <id property="detailsid" column="detailsid"/>
+        <result property="foodName" column="foodName"/>
+        <result property="orderCode" column="orderCode"/>
+        <result property="foodPath" column="foodPath"/>
+        <result property="num" column="num"/>
+
+    </resultMap>
+    <select id="findAllDetails" resultMap="DetailsResultMap">
+        SELECT detailsId,foodName,orderCode,num,foodPath
+        FROM details d
+        LEFT JOIN food f ON d.foodId = f.foodId
+        LEFT JOIN orders o ON d.orderId = o.orderId
+        where  detailsState = 1 and  orderTime = #{time}
+    </select>
+
+    <select id="findFinishDetails" resultMap="DetailsResultMap">
+        SELECT detailsId,foodName,orderCode,num,foodPath
+        FROM details d
+        LEFT JOIN food f ON d.foodId = f.foodId
+        LEFT JOIN orders o ON d.orderId = o.orderId
+        where  detailsState = 0 and  orderTime = #{time}
+    </select>
+
+    <update id="editDetailsState" >
+        UPDATE details
+        SET detailsState = 0
+        WHERE detailsId = #{value}
+    </update>
 
 </mapper>

@@ -1,9 +1,6 @@
 package com.restaurant.service.impl;
 
-import com.restaurant.entity.Details;
-import com.restaurant.entity.Food;
-import com.restaurant.entity.FoodUtil;
-import com.restaurant.entity.WrapperUtil;
+import com.restaurant.entity.*;
 import com.restaurant.mapper.DetailsMapper;
 import com.restaurant.service.IDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +46,28 @@ public class DetailsService implements IDetailsService {
         }
         return detailsMapper.addDetails(
                 wrapperUtil.getOrderid(), foodUtilList);
+    }
+    /**
+     * 查询所有订单
+     * @return
+     */
+    public List<DetailsEmp> findAllDetails(String time){
+        return detailsMapper.findAllDetails(time);
+    }
+
+    /**
+     * 查询今日完成了的订单
+     * @return
+     */
+    public List<DetailsEmp> findFinishDetails(String time) {
+        return detailsMapper.findFinishDetails(time);
+    }
+
+    /**
+     * 修改详情状态
+     * @param detailsId
+     */
+    public int editDetailsState(int detailsId){
+        return detailsMapper.editDetailsState(detailsId);
     }
 }

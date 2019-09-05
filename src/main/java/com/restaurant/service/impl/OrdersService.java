@@ -40,6 +40,7 @@ public class OrdersService implements IOrdersService {
 
         if(!(orderid != null && orderid > 0)){//如果订单不存在，创建一个
             orders.setOrdercode(wrapperUtil.getOrderCode());
+            //设置未完成
             orders.setOrderstate(1);
             orders.setOrdertime(new Date());
             int orderRowCount = ordersMapper.addOrders(orders);
@@ -60,9 +61,8 @@ public class OrdersService implements IOrdersService {
         for (Integer integer:
                 foodList) {//进行填值
             FoodUtil foodUtil = new FoodUtil();
-            Food food = new Food();
-            food.setFoodid(integer);
-            foodUtil.setFoodid(food.getFoodid());
+
+            foodUtil.setFoodid(integer);
             foodUtil.setNum(integerList.get(num));
 
             foodUtilList.add(foodUtil);

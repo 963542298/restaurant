@@ -57,4 +57,21 @@ public class FoodService implements IFoodService {
     public Integer addFood(String foodname,String foodpath,Integer foodstate,Type type){
         return foodMapper.addFood(foodname,foodpath,foodstate,type);
     }
+    /**
+     * 根据查询所有菜
+     * @return
+     */
+    public List<Food> findFoodByTypeId(int typeId){
+        return foodMapper.findFoodByTypeId(typeId);
+    }
+
+    /**
+     * 菜品上下架
+     * @param foodid
+     * @param foodstate
+     * @return
+     */
+    public int UpOrDownFoodState(int foodid, int foodstate) {
+        return foodMapper.UpOrDownFoodState(foodid,foodstate);
+    }
 }

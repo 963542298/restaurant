@@ -17,10 +17,11 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 import static com.restaurant.util.RandomName.getRandomName;
 
-//@CrossOrigin(origins = {"/*", "null"})
+@CrossOrigin(origins = {"*", "null"})
 @Controller
 public class FoodController {
 
@@ -33,7 +34,8 @@ public class FoodController {
      * 查询所有菜品
      */
     @RequestMapping("/food/showAllFood")
-    public @ResponseBody PageInfo<Food> showAllFood(Model model, HttpServletRequest request, Integer page, Integer pageSize){
+    public @ResponseBody ResultUtil showAllFood(HttpServletRequest request, Integer page, Integer pageSize){
+        resultUtil.reset();
         String foodName = request.getParameter("foodName");
         String foodState = request.getParameter("foodState");
         String typeId = request.getParameter("foodType");
@@ -49,8 +51,16 @@ public class FoodController {
         type.setTypeid(typeid);
 
         PageInfo<Food> pageList = foodService.showAllFood(foodName,foodstate,type,page,pageSize);
-        return pageList;
+        if(pageList != null){
+            resultUtil.setCode(0).setData(pageList);
+        } else {
+            resultUtil.setCode(0).setMessage("查询有误");
+        }
+
+        return resultUtil;
     }
+
+
 
     /**
      * 修改状态
@@ -103,12 +113,12 @@ public class FoodController {
      * 添加
      */
     @RequestMapping("/food/addFood")
-    public @ResponseBody ResultUtil addFood(MultipartFile file,HttpServletRequest request){
-
+    public @ResponseBody ResultUtil addFood(HttpServletRequest request){
         String foodName = request.getParameter("foodName");
         String foodState = request.getParameter("foodState");
         String typeId = request.getParameter("foodType");
-        String foodPath = uploadImage(file,request);
+        String foodPath = request.getParameter("foodPath");
+
         Integer foodstate = -1;
         Integer typeid = -1;
         if(foodState != null && foodState != ""){
@@ -122,11 +132,9 @@ public class FoodController {
 
         int count = foodService.addFood(foodName,foodPath,foodstate,type);
         if(count > 0){
-            resultUtil.reset();
             resultUtil.setCode(0).setMessage("添加成功");
         } else {
-            resultUtil.reset();
-            resultUtil.setCode(1).setMessage("添加失败");
+            resultUtil.setCode(0).setMessage("添加失败");
         }
         return resultUtil;
     }
@@ -134,8 +142,10 @@ public class FoodController {
     /**
      * 上传图片
      */
-   public @ResponseBody String uploadImage(MultipartFile file, HttpServletRequest request){
+    @RequestMapping("/food/uploadImage")
+    public @ResponseBody ResultUtil uploadImage(MultipartFile file, HttpServletRequest request){
 
+        resultUtil.reset();
         //取得文件名 d:\afas\sdfs\xxx.jpg
         String name = file.getOriginalFilename();
         //截取字符串 最后面的文件名
@@ -157,17 +167,57 @@ public class FoodController {
             dirFile.mkdirs();
         }
 
-        //文件上传真实路径
-        String realPathName = realPath + "/" + dir + "/" + map.get("fileName");
+        //文件路径
+        String realPathName = realPath + "/images" + dir + "/" + map.get("fileName");
+        //存入数据库的路径
+        String foodPath = dir + "/" + map.get("fileName");
         //上传文件
         File uploadFile = new File(realPathName);
-        System.out.println(realPathName);
         try {
-            //
             file.transferTo(uploadFile);
+            resultUtil.setCode(0).setData(foodPath);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return realPathName;
+        return resultUtil;
+    }
+    //==========================================================================
+
+    /**
+     * 查询所有菜品
+     */
+    @RequestMapping("/food/findFoodByTypeId")
+    public @ResponseBody
+    ResultUtil findFoodByTypeId( Integer typeid){
+
+        List<Food> foodList = foodService.findFoodByTypeId(typeid);
+        if (foodList != null && foodList.size() > 0){
+            resultUtil.reset();
+            resultUtil.setData(foodList).setCode(0).setMessage("查询成功");
+        } else {
+            resultUtil.reset();
+            resultUtil.setCode(1).setMessage("查询失败");
+        }
+        return resultUtil;
+    }
+
+    /**
+     * 菜品上下架
+     * @param foodid
+     * @param foodstate
+     * @return
+     */
+    @RequestMapping("food/UpOrDownFoodState")
+    public @ResponseBody
+    ResultUtil UpOrDownFoodState(int foodid,int foodstate){
+        int num = foodService.UpOrDownFoodState(foodid,foodstate);
+        if (num!= 0){
+            resultUtil.reset();
+            resultUtil.setCode(0).setMessage("查询成功");
+        } else {
+            resultUtil.reset();
+            resultUtil.setCode(1).setMessage("查询失败");
+        }
+        return resultUtil;
     }
 }

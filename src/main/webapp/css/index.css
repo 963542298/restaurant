@@ -23,7 +23,8 @@ body{ background-color:#E5E5E5;}
 .prt-lt .lt-ct p.pr{ margin-top:0.2rem; color:#FF5151;}
 .prt-lt .lt-rt{ position:absolute; bottom:0.1rem; right:0.1rem; width:0.9rem; height:0.3rem;}
 .prt-lt .lt-rt input{ float:left; width:0.28rem; height:0.28rem; font-size:0.18rem; border:1px solid #e5e5e5; text-align:center; color:#A1A09C; background-color:#fff;}
-.prt-lt .lt-rt input.result{ border:none; color:#FF5151;}
+.prt-lt .lt-rt p{ float:left; width:0.28rem; height:0.28rem; font-size:0.18rem; border:1px solid #e5e5e5; text-align:center; color:#A1A09C; background-color:#fff;}
+.prt-lt .lt-rt p.result{ border:none; color:#FF5151;font-size: 0.18rem;}
 .total{ color:#FF5151;}
 .nm{ color:#868B92;}
 .support{ width:3rem; height:0.4rem; margin-bottom:0.45rem; background-color:#fff;}

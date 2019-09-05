@@ -11,6 +11,26 @@
     select * from type
   </select>
 
+  <select id="findAllTypeName" resultType="Type">
+    select typeId,typeName from type
+  </select>
+
+  <resultMap id="findTypeAndFoodMap" type="Type">
+    <id property="typeid" column="typeid"/>
+    <result property="typename" column="typename"/>
+    <collection property="foodList" ofType="Food">
+      <id property="foodid" column="foodid"/>
+      <result column="foodname" property="foodname"/>
+        <result column="foodpath" property="foodpath"/>
+    </collection>
+  </resultMap>
+  <select id="findTypeAndFood" resultMap="findTypeAndFoodMap">
+     SELECT t.typeid,typename,foodname,foodid,foodpath
+     FROM TYPE t
+     LEFT JOIN food f
+     ON f.typeId = t.typeId
+     WHERE foodstate = 0
+  </select>
 
 
 </mapper>

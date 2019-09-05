@@ -4,6 +4,8 @@ import com.github.pagehelper.PageInfo;
 import com.restaurant.entity.Food;
 import com.restaurant.entity.Type;
 
+import java.util.List;
+
 public interface IFoodService {
 
     /**
@@ -25,4 +27,17 @@ public interface IFoodService {
      * 添加
      */
     Integer addFood(String foodname,String foodpath,Integer foodstate,Type type);
+    /**
+     * 根据查询所有菜
+     * @return
+     */
+    List<Food> findFoodByTypeId(int typeId);
+
+    /**
+     * 菜品上下架
+     * @param foodid
+     * @param foodstate
+     * @return
+     */
+    int UpOrDownFoodState(int foodid,int foodstate);
 }

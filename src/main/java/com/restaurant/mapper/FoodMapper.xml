@@ -2,7 +2,64 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.restaurant.mapper.FoodMapper" >
 
-  <select id="showAllFood" resultType="Food">
-    select * from food
+  <resultMap id="showAllFoodMap" type="Food">
+    <id column="foodid" property="foodid"/>
+    <result column="foodname" property="foodname"/>
+    <result column="foodstate" property="foodstate"/>
+    <association property="type" javaType="Type">
+      <id column="typeid" property="typeid"/>
+      <result column="typename" property="typename"/>
+    </association>
+  </resultMap>
+
+  <insert id="addFood">
+        insert into food(foodname,foodpath,typeid,foodstate)
+        values(#{foodname},#{foodpath},#{type.typeid},#{foodstate})
+    </insert>
+
+  <update id="updateFoodState">
+        update food set foodstate = #{foodstate} where foodid = #{foodid}
+    </update>
+
+  <delete id="deleteFood">
+        delete from food where foodid = #{foodid}
+    </delete>
+
+  <select id="showAllFood" resultMap="showAllFoodMap">
+    select foodid,foodname,foodstate,typename,t.typeid
+    from food f left join type t on f.typeid=t.typeid
+    <where>
+      <if test="foodname != null and foodname != ''">
+        and foodname like #{foodname}
+      </if>
+      <if test="foodstate != null and foodstate != -1">
+        and foodstate = #{foodstate}
+      </if>
+      <if test="type.typeid != null and type.typeid != -1">
+        and t.typeid = #{type.typeid}
+      </if>
+    </where>
   </select>
+  <resultMap id="findFoodByTypeIdMap" type="Food">
+    <id property="foodid" column="foodId"/>
+    <result property="foodname" column="foodName"/>
+    <result property="foodpath" column="foodPath"/>
+    <result property="foodstate" column="foodState"/>
+    <association property="type" javaType="Type">
+      <result property="typeid" column="typeId"/>
+    </association>
+  </resultMap>
+  <select id="findFoodByTypeId" resultMap="findFoodByTypeIdMap">
+    select foodId,foodName,foodPath,foodState,typeId from food
+    where 1=1
+    <if test="typeid != 0 ">
+      and typeid = #{typeid}
+    </if>
+  </select>
+  <update id="UpOrDownFoodState">
+    update food set
+    <if test="foodstate==0">foodState=1</if>
+    <if test="foodstate==1">foodState=0</if>
+    where foodId=#{foodid}
+  </update>
 </mapper>

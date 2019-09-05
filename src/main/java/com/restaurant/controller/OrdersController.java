@@ -6,21 +6,20 @@ import com.restaurant.service.IOrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.HttpRequestHandler;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.restaurant.util.ConfigUtils.*;
+import static com.restaurant.util.RandomOrderCode.*;
 
 /**
  *
  */
-//@CrossOrigin(origins = {"/*", "null"})
+@CrossOrigin(origins = {"*", "null"})
 @Controller
 public class OrdersController {
 
@@ -35,29 +34,34 @@ public class OrdersController {
      */
     @RequestMapping("/orders/addOrders")
     public @ResponseBody
-    ResultUtil addOrders(@RequestBody List<Integer> foodList,@RequestBody List<Integer> integerList){
-//        WrapperUtil wrapperUtil = new WrapperUtil();
-//        String food = request.getParameter("foodList");
-//        String integer = request.getParameter("integerList");
-//        System.out.println(wrapperUtil.getFoodList().toString());
-//        System.out.println(wrapperUtil.getIntegerList().toString());
-//        //取得菜品数组
-//        List<Integer> foodList = wrapperUtil.getFoodList();
-//        //取得菜品数量
-//        List<Integer> integerList = wrapperUtil.getIntegerList();
+    ResultUtil addOrders(String foodList,String integerList,String id){
+
+        String[] foods = foodList.split(",");
+        String[] integers = integerList.split(",");
+
+        List<Integer> foodList1 = new ArrayList<Integer>();
+        List<Integer> integerList1 = new ArrayList<Integer>();
+        for (String str:
+             foods) {
+            foodList1.add(Integer.parseInt(str));
+        }
+        for (String str:
+             integers) {
+            integerList1.add(Integer.parseInt(str));
+        }
+
         //创建订单详情数组
         List<Details> detailsList = new ArrayList<Details>();
-
         int num = 0;
         //接收菜品
-        for (Integer integer:
-             foodList) {//进行填值
+        for (Integer integer1:
+             foodList1) {//进行填值
             Details details = new Details();
-            Food food = new Food();
-            food.setFoodid(integer);
+            Food food1 = new Food();
+            food1.setFoodid(integer1);
 
-            details.setFood(food);
-            details.setNum(integerList.get(num));
+            details.setFood(food1);
+            details.setNum(integerList1.get(num));
 
             detailsList.add(details);
             num++;
@@ -66,9 +70,10 @@ public class OrdersController {
         orders.setDetailsList(detailsList);
 
         WrapperUtil wrapperUtil = new WrapperUtil();
-        wrapperUtil.setFoodList(foodList);
-        wrapperUtil.setIntegerList(integerList);
-        wrapperUtil.setOrderCode("202019082819");
+        wrapperUtil.setFoodList(foodList1);
+        wrapperUtil.setIntegerList(integerList1);
+        String orderCode = id+getRandomOrderCode();
+        wrapperUtil.setOrderCode(orderCode);
 
         int rowCount = ordersService.addOrders(orders,wrapperUtil);
         if(rowCount > 0){

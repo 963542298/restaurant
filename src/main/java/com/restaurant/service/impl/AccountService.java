@@ -8,6 +8,8 @@ import com.restaurant.entity.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import static com.restaurant.util.MD5Util.*;
+
 @Service
 public class AccountService implements IAccountService {
 
@@ -16,6 +18,7 @@ public class AccountService implements IAccountService {
 
     @Override
     public Account login(String accountName, String accountPwd) {
+        String pwd = encrypt(accountPwd);
         return AccountMapper.login(accountName,accountPwd);
     }
 

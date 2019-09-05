@@ -32,7 +32,13 @@ layui.use(['table','laypage','layer'], function() {
                 $("#demoReload").val('');
                 break;
             case 'addUser':
-                location.href="userAdd.html"
+                var index = layui.layer.open({
+                    title: "添加用户",
+                    area: ['500px', '480px'],
+                    type: 2,
+                    content: "userAdd.jsp"
+                })
+
 
         };
     });
@@ -42,16 +48,30 @@ layui.use(['table','laypage','layer'], function() {
         //var checkStatus = table.checkStatus(obj.config.id);
         console.log(obj)
         if(obj.event === 'fle') {
-            layer.confirm('确定将人员【'+data.username+'】锁定？',
-                {icon:3,title: '提示信息'},
-                function(index) {
-                    $.ajax({
-                        type:"post",
-                        url: "http://localhost:8080/restaurant/updateUserState.action?userState=0"+"&userId="+data.userid,
+            if(data.userstate==1){
+                layer.confirm('确定将人员【'+data.username+'】锁定？',
+                    {icon:3,title: '提示信息'},
+                    function(index) {
+                        $.ajax({
+                            type:"post",
+                            url: "http://localhost:8080/restaurant/updateUserState.action?userState=0"+"&userId="+data.userid,
+                        });
+                        layer.close(index);
+                        ptable();
                     });
-                    layer.close(index);
-                    ptable();
-                });
+            }else if(data.userstate==0){
+                layer.confirm('确定将人员【'+data.username+'】解锁？',
+                    {icon:3,title: '提示信息'},
+                    function(index) {
+                        $.ajax({
+                            type:"post",
+                            url: "http://localhost:8080/restaurant/unlockUserState.action?userState=1"+"&userId="+data.userid,
+                        });
+                        layer.close(index);
+                        ptable();
+                    });
+            }
+
         }
 
         if(obj.event==='del'){
@@ -65,6 +85,15 @@ layui.use(['table','laypage','layer'], function() {
                     layer.close(index);
                     ptable();
                 });
+        }
+
+        if(obj.event==='edit'){
+            var index = layui.layer.open({
+                title: "编辑信息",
+                area: ['500px', '480px'],
+                type: 2,
+                content: "userEdit.jsp?&userid="+data.userid
+            })
         }
 
     });
@@ -109,7 +138,7 @@ layui.use(['table','laypage','layer'], function() {
                     //sort: true,
                     align: 'center'
                 }, {
-                    field: 'useraddress',
+                    field: 'userphone',
                     title: '电话',
                     //sort: true,
                     align: 'center'
@@ -119,7 +148,7 @@ layui.use(['table','laypage','layer'], function() {
                     //sort: true,
                     align: 'center'
                 }, {
-                    field: 'userphone',
+                    field: 'useraddress',
                     title: '地址',
                     //sort: true,
                     align: 'center'
@@ -136,13 +165,21 @@ layui.use(['table','laypage','layer'], function() {
                 theme:'#1E9FFF'},
 
             done:function(data){
-                $("[data-field='userState']").children().each(function(){
+                $("[data-field='userstate']").children().each(function(){
                     if($(this).text()=='1'){
                         $(this).text("超级会员")
                     }else if($(this).text()=='0'){
                         $(this).text("普通用户")
                     }
                 });
+                $("[data-field='usersex']").children().each(function(){
+                    if($(this).text()=='1'){
+                        $(this).text("男")
+                    }else if($(this).text()=='2'){
+                        $(this).text("女")
+                    }
+                });
+
             }
         });
     }

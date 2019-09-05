@@ -31,4 +31,18 @@ public interface FoodMapper {
      * 添加
      */
     Integer addFood(@Param("foodname") String foodname,@Param("foodpath") String foodpath,@Param("foodstate") Integer foodstate, @Param("type") Type type);
+    /**
+     * 根据查询所有菜
+     * @return
+     */
+    List<Food> findFoodByTypeId(@Param("typeid") int typeid);
+
+    /**
+     * 菜品上下架
+     * @param foodid
+     * @param foodstate
+     * @return
+     */
+    int UpOrDownFoodState(@Param("foodid")int foodid,@Param("foodstate")int foodstate);
+
 }
