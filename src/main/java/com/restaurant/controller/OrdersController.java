@@ -113,4 +113,24 @@ public class OrdersController {
         model.addAttribute("resultUtil",resultUtil);
         return resultUtil;
     }
+
+    /**
+     * 修改订单状态
+     * @param tableCode
+     * @return
+     */
+    @RequestMapping("orders/updateOrder")
+    public @ResponseBody ResultUtil updateOrderByOrderCode(String tableCode){
+        resultUtil.reset();
+        String orderCode = tableCode+getDayCode();
+
+        Integer rowCount = ordersService.updateOrdersStateByCode(orderCode);
+        if(rowCount > 0){
+            resultUtil.setCode(0).setMessage("修改成功");
+        } else {
+            resultUtil.setCode(1).setMessage("修改失败");
+        }
+
+        return resultUtil;
+    }
 }

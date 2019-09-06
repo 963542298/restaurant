@@ -2,6 +2,9 @@ package com.restaurant.entity;
 
 import java.io.Serializable;
 
+/**
+ * 餐桌实体类
+ */
 public class Table implements Serializable{
 
 	private String tableCode;

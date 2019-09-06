@@ -4,6 +4,7 @@ import com.restaurant.entity.Food;
 
 import java.util.List;
 
+import com.restaurant.entity.Statistics;
 import com.restaurant.entity.Type;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -31,6 +32,7 @@ public interface FoodMapper {
      * 添加
      */
     Integer addFood(@Param("foodname") String foodname,@Param("foodpath") String foodpath,@Param("foodstate") Integer foodstate, @Param("type") Type type);
+
     /**
      * 根据查询所有菜
      * @return
@@ -44,5 +46,11 @@ public interface FoodMapper {
      * @return
      */
     int UpOrDownFoodState(@Param("foodid")int foodid,@Param("foodstate")int foodstate);
+
+    /**
+     * 统计
+     * @return
+     */
+    List<Statistics> queryFoodNum();
 
 }

@@ -20,12 +20,15 @@ public interface AccountMapper {
     @Update("update account set accountPwd=? where userId=?")
     Integer update(int userID,String accountPwd);
 
+    //通过名字查询账号
     @Select("select accountid,accountname,accountpwd from account where accountname=#{0}")
     Account getAccount(String accountname);
 
+    //通过名字查询role
     @Select("select role from account where accountname=#{0}")
     Integer getRole(String accountname);
 
+    //删除账号
     @Delete("delete from account where userid=#{userid}")
     Integer delete(@Param("userid") Integer userid);
 }

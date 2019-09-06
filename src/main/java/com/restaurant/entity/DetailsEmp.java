@@ -1,5 +1,8 @@
 package com.restaurant.entity;
 
+/**
+ * 订单详情帮助类
+ */
 public class DetailsEmp extends Details{
     private String foodName;
     private String foodPath;

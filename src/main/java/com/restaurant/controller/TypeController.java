@@ -63,6 +63,7 @@ public class TypeController {
     @RequestMapping("/type/findAllTypeName")
     public @ResponseBody
     ResultUtil findAllTypeName(){
+        resultUtil.reset();
         List<Type> typeList = typeService.findAllTypeName();
         if (typeList != null && typeList.size() > 0){
             resultUtil.reset();

@@ -37,4 +37,11 @@ public interface OrdersMapper {
      * @return
      */
     List<Orders> queryAllOrders(@Param("ordercode") String ordercode);
+
+    /**
+     * 更改订单状态
+     * @param orderCode
+     * @return
+     */
+    Integer updateOrdersStateByCode(String orderCode);
 }

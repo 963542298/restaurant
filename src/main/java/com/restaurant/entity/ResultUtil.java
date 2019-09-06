@@ -1,5 +1,8 @@
 package com.restaurant.entity;
 
+/**
+ * 数据帮助类
+ */
 public class ResultUtil {
 
     private int code;

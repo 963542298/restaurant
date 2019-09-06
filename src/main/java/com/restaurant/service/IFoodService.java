@@ -2,6 +2,7 @@ package com.restaurant.service;
 
 import com.github.pagehelper.PageInfo;
 import com.restaurant.entity.Food;
+import com.restaurant.entity.Statistics;
 import com.restaurant.entity.Type;
 
 import java.util.List;
@@ -40,4 +41,10 @@ public interface IFoodService {
      * @return
      */
     int UpOrDownFoodState(int foodid,int foodstate);
+
+    /**
+     * 统计
+     * @return
+     */
+    List<Statistics> queryFoodNum();
 }

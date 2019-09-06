@@ -26,6 +26,14 @@
 
     </insert>
 
+    <delete id="deleteDetailsByOrderCode">
+        DELETE d
+        FROM details d
+        LEFT JOIN orders o
+        ON d.orderId = o.orderId
+        WHERE o.orderCode LIKE #{value} AND d.detailsState = 1
+    </delete>
+
     <select id="queryDetailsByOrdersId" resultMap="queryDetailsByOrdersIdMap">
         select detailsid,num,
         f.foodid,foodname,foodpath,foodstate,

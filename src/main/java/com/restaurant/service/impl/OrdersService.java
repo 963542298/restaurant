@@ -98,4 +98,26 @@ public class OrdersService implements IOrdersService {
     public int getOrdersByOrdercode(String ordercode){
         return ordersMapper.getOrdersByOrdercode(ordercode);
     }
+
+    /**
+     * 更改订单状态
+     * @param orderCode
+     * @return
+     */
+    public Integer updateOrdersStateByCode(String orderCode){
+        Integer row = ordersMapper.updateOrdersStateByCode(orderCode);
+        if(row > 0){
+            try{
+                Integer rowCount = detailsMapper.deleteDetailsByOrderCode(orderCode);
+                return 1;
+            } catch (Exception e){
+                e.printStackTrace();
+                return -1;
+            }
+        } else {
+            return row;
+        }
+
+
+    }
 }

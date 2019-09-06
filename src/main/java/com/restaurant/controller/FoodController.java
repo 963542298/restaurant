@@ -3,6 +3,7 @@ package com.restaurant.controller;
 import com.github.pagehelper.PageInfo;
 import com.restaurant.entity.Food;
 import com.restaurant.entity.ResultUtil;
+import com.restaurant.entity.Statistics;
 import com.restaurant.entity.Type;
 import com.restaurant.service.IFoodService;
  import org.springframework.beans.factory.annotation.Autowired;
@@ -60,13 +61,12 @@ public class FoodController {
         return resultUtil;
     }
 
-
-
     /**
      * 修改状态
      */
     @RequestMapping("/food/updateFoodState")
     public @ResponseBody ResultUtil updateFoodState(HttpServletRequest request){
+        resultUtil.reset();
         String foodId = request.getParameter("foodId");
         String foodState = request.getParameter("foodState");
         Integer foodid = -1;
@@ -93,6 +93,7 @@ public class FoodController {
      */
     @RequestMapping("/food/deleteFood")
     public @ResponseBody ResultUtil deleteFood(HttpServletRequest request){
+        resultUtil.reset();
         String foodId = request.getParameter("foodId");
         Integer foodid = -1;
         if(foodId != null){
@@ -114,6 +115,7 @@ public class FoodController {
      */
     @RequestMapping("/food/addFood")
     public @ResponseBody ResultUtil addFood(HttpServletRequest request){
+        resultUtil.reset();
         String foodName = request.getParameter("foodName");
         String foodState = request.getParameter("foodState");
         String typeId = request.getParameter("foodType");
@@ -189,7 +191,7 @@ public class FoodController {
     @RequestMapping("/food/findFoodByTypeId")
     public @ResponseBody
     ResultUtil findFoodByTypeId( Integer typeid){
-
+        resultUtil.reset();
         List<Food> foodList = foodService.findFoodByTypeId(typeid);
         if (foodList != null && foodList.size() > 0){
             resultUtil.reset();
@@ -210,6 +212,7 @@ public class FoodController {
     @RequestMapping("food/UpOrDownFoodState")
     public @ResponseBody
     ResultUtil UpOrDownFoodState(int foodid,int foodstate){
+        resultUtil.reset();
         int num = foodService.UpOrDownFoodState(foodid,foodstate);
         if (num!= 0){
             resultUtil.reset();
@@ -217,6 +220,22 @@ public class FoodController {
         } else {
             resultUtil.reset();
             resultUtil.setCode(1).setMessage("查询失败");
+        }
+        return resultUtil;
+    }
+
+    /**
+     * 统计
+     * @return
+     */
+    @RequestMapping("/food/foodnum")
+    public @ResponseBody ResultUtil queryFoodNum(){
+        resultUtil.reset();
+        List<Statistics> statisticsList = foodService.queryFoodNum();
+        if (statisticsList != null && statisticsList.size() > 0) {
+            resultUtil.setCode(0).setData(statisticsList);
+        } else {
+            resultUtil.setCode(1).setMessage("暂无数据");
         }
         return resultUtil;
     }

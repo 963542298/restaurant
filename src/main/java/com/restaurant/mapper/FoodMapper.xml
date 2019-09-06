@@ -56,7 +56,16 @@
       and typeid = #{typeid}
     </if>
   </select>
-  <update id="UpOrDownFoodState">
+
+    <select id="queryFoodNum" resultType="com.restaurant.entity.Statistics">
+      SELECT d.foodid,foodname,SUM(num)
+      FROM details d
+      LEFT JOIN food f
+      ON f.foodId = d.foodId
+      GROUP BY f.foodId
+    </select>
+
+    <update id="UpOrDownFoodState">
     update food set
     <if test="foodstate==0">foodState=1</if>
     <if test="foodstate==1">foodState=0</if>

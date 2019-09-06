@@ -24,6 +24,7 @@
         <result column="foodpath" property="foodpath"/>
     </collection>
   </resultMap>
+
   <select id="findTypeAndFood" resultMap="findTypeAndFoodMap">
      SELECT t.typeid,typename,foodname,foodid,foodpath
      FROM TYPE t

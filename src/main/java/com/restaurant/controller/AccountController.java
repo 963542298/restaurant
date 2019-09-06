@@ -14,9 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @CrossOrigin(origins = {"*", "null"})
 @Controller
@@ -24,6 +22,13 @@ public class AccountController {
     @Autowired
     private IAccountService IAccountServiceImpl;
 
+    /**
+     * 登录
+     * @param model
+     * @param account
+     * @param br
+     * @return
+     */
     @RequestMapping("/login.action")
     public String login( Model model,@Validate Account account,BindingResult br){
 

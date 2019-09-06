@@ -4,7 +4,7 @@ package com.restaurant.entity;
 import java.util.List;
 
 /**
- *
+ * 订单帮助类
  */
 public class WrapperUtil {
 

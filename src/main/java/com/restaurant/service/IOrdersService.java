@@ -29,4 +29,11 @@ public interface IOrdersService {
      * @return
      */
     int getOrdersByOrdercode(String ordercode);
+
+    /**
+     * 更改订单状态
+     * @param OrderCode
+     * @return
+     */
+    Integer updateOrdersStateByCode(String OrderCode);
 }

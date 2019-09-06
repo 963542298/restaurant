@@ -3,7 +3,7 @@ package com.restaurant.entity;
 import java.io.Serializable;
 
 /**
- *
+ * 食物帮助类
  */
 public class FoodUtil implements Serializable {
 

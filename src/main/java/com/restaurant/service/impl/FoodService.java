@@ -3,6 +3,7 @@ package com.restaurant.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.restaurant.entity.Food;
+import com.restaurant.entity.Statistics;
 import com.restaurant.entity.Type;
 import com.restaurant.mapper.FoodMapper;
 import com.restaurant.service.IFoodService;
@@ -73,5 +74,13 @@ public class FoodService implements IFoodService {
      */
     public int UpOrDownFoodState(int foodid, int foodstate) {
         return foodMapper.UpOrDownFoodState(foodid,foodstate);
+    }
+
+    /**
+     * 统计
+     * @return
+     */
+    public List<Statistics> queryFoodNum(){
+        return foodMapper.queryFoodNum();
     }
 }

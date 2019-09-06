@@ -94,9 +94,9 @@
 					<i class="iconfont nav_right">&#xe697;</i></a>
 				<ul class="sub-menu">
 					<li>
-						<a onclick="xadmin.add_tab('拆线图','echarts1.html')">
+						<a onclick="xadmin.add_tab('菜品统计','/restaurant/admin/echartsFood.jsp')">
 							<i class="iconfont">&#xe6a7;</i>
-							<cite>拆线图</cite></a>
+							<cite>菜品统计</cite></a>
 					</li>
 					<li>
 						<a onclick="xadmin.add_tab('拆线图','echarts2.html')">

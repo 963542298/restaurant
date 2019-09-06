@@ -22,8 +22,12 @@
     </collection>
   </resultMap>
 
+    <update id="updateOrdersStateByCode">
+      update orders set where orderstate = 0 where ordercode = #{value}
+    </update>
 
-  <select id="queryAllOrders" resultType="Orders">
+
+    <select id="queryAllOrders" resultType="Orders">
     SELECT orderid,ordercode,ordertime,orderstate
     FROM orders
     <where>

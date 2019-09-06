@@ -44,4 +44,12 @@ public interface DetailsMapper {
      * @param detailsId
      */
     int editDetailsState(int detailsId);
+
+    /**
+     *
+     * @param orderCode
+     * @return
+     */
+    Integer deleteDetailsByOrderCode(String orderCode);
+
 }
