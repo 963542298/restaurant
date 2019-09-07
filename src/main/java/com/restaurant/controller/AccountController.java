@@ -16,6 +16,10 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
+
+import static com.restaurant.util.MD5Util.*;
+
 @CrossOrigin(origins = {"*", "null"})
 @Controller
 public class AccountController {
@@ -50,7 +54,7 @@ public class AccountController {
                 Subject currentUser = SecurityUtils.getSubject();
                 //
                 UsernamePasswordToken token = new UsernamePasswordToken
-                        (account.getAccountname(), account.getAccountpwd());
+                        (account.getAccountname(),encrypt(account.getAccountpwd()) );
 
                 try{
                     //判断当前用户是否可以的管理
@@ -72,5 +76,12 @@ public class AccountController {
                 }
             }
        }
+    }
+
+    @RequestMapping("/logout")
+    public String logout(HttpSession session) {
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
+        return "login.jsp";
     }
 }

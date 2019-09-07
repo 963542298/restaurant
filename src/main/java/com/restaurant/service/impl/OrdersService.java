@@ -2,20 +2,22 @@ package com.restaurant.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.restaurant.entity.Food;
 import com.restaurant.entity.FoodUtil;
+import com.restaurant.entity.OrderUtil;
 import com.restaurant.entity.Orders;
 import com.restaurant.entity.WrapperUtil;
 import com.restaurant.mapper.DetailsMapper;
 import com.restaurant.mapper.OrdersMapper;
 import com.restaurant.service.IOrdersService;
-import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import static com.restaurant.util.RandomOrderCode.*;
+import static com.restaurant.util.DateUtil.*;
 
 /**
  *
@@ -35,13 +37,16 @@ public class OrdersService implements IOrdersService {
     public int addOrders(Orders orders,WrapperUtil wrapperUtil) {
 
         //查询订单是否存在
-        Integer orderid = ordersMapper.getOrdersByOrdercode(wrapperUtil.getOrderCode());
+        String tableCode = wrapperUtil.getOrderCode().substring(0,2);
+        String orderCode = tableCode+getDayCode();
+        Integer orderid = ordersMapper.getOrdersByOrdercode('%'+orderCode+'%');
         wrapperUtil.setOrderid(orderid);
 
         if(!(orderid != null && orderid > 0)){//如果订单不存在，创建一个
             orders.setOrdercode(wrapperUtil.getOrderCode());
             //设置未完成
             orders.setOrderstate(1);
+            //传入下单时间
             orders.setOrdertime(new Date());
             int orderRowCount = ordersMapper.addOrders(orders);
             if (orderRowCount <= 0 ) {//创建失败
@@ -109,7 +114,12 @@ public class OrdersService implements IOrdersService {
         if(row > 0){
             try{
                 Integer rowCount = detailsMapper.deleteDetailsByOrderCode(orderCode);
-                return 1;
+                if(rowCount > 0){
+                    return 1;
+                } else {
+                    return -1;
+                }
+
             } catch (Exception e){
                 e.printStackTrace();
                 return -1;
@@ -117,7 +127,15 @@ public class OrdersService implements IOrdersService {
         } else {
             return row;
         }
+    }
 
-
+    /**
+     * 一段时间的订单数量
+     * @return
+     */
+    public List<OrderUtil> queryThreeDayOrder(Integer type){
+        List<String> stringList = pastDay(type);
+        System.out.println(stringList);
+        return ordersMapper.queryThreeDayOrder(stringList.get(0),stringList.get(1));
     }
 }

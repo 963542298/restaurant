@@ -1,5 +1,6 @@
 package com.restaurant.mapper;
 
+import com.restaurant.entity.OrderUtil;
 import com.restaurant.entity.Orders;
 
 import java.util.List;
@@ -28,7 +29,7 @@ public interface OrdersMapper {
      * @param ordercode
      * @return
      */
-    @Select("select orderid from orders where ordercode = #{value} ")
+    @Select("select orderid from orders where ordercode like #{value} and orderstate = 1")
     Integer getOrdersByOrdercode(String ordercode);
 
     /**
@@ -44,4 +45,10 @@ public interface OrdersMapper {
      * @return
      */
     Integer updateOrdersStateByCode(String orderCode);
+
+    /**
+     * 一段时间的订单数量
+     * @return
+     */
+    List<OrderUtil> queryThreeDayOrder(String pastDate,String nowDate);
 }

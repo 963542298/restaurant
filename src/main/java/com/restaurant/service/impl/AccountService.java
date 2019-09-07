@@ -19,7 +19,7 @@ public class AccountService implements IAccountService {
     @Override
     public Account login(String accountName, String accountPwd) {
         String pwd = encrypt(accountPwd);
-        return AccountMapper.login(accountName,accountPwd);
+        return AccountMapper.login(accountName,pwd);
     }
 
     public Integer insert(String accountname, String accountpwd ,Integer role,Integer userID) {

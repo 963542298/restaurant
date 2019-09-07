@@ -2,7 +2,6 @@ package com.restaurant.util;
 
 import com.restaurant.entity.Account;
 import com.restaurant.mapper.AccountMapper;
-import com.restaurant.mapper.UserMapper;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -16,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
 import java.util.Set;
+
 
 
 @Component
@@ -36,7 +36,7 @@ public class MyRealm  extends AuthorizingRealm{
 		if(account != null){
 			//设置认证信息
 			AuthenticationInfo info =
-					new SimpleAuthenticationInfo(account.getAccountpwd(), account.getAccountpwd(), "myRealm");
+					new SimpleAuthenticationInfo(account.getAccountname(), account.getAccountpwd(), "myRealm");
 			return info;
 		}
 		return null;

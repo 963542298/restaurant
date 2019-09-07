@@ -60,18 +60,18 @@ public class UserService implements IUserSevice {
     /**
      * 根据人员Id来改人员的状态
      */
-    public int updateState(Integer userState, Integer userId) {
-        return mapper.updateState(userState, userId);
+    public int updateState(Integer role, Integer userId) {
+        return accountmapper.updateState(role, userId);
     }
 
     /**
      * 解锁用户
-     * @param userState
+     * @param role
      * @param userId
      * @return
      */
-    public int unlockUserState(Integer userState, Integer userId){
-        return mapper.unlockUserState(userState, userId);
+    public int unlockUserState(Integer role, Integer userId){
+        return accountmapper.unlockUserState(role, userId);
     }
 
     /**
@@ -80,6 +80,8 @@ public class UserService implements IUserSevice {
      * @return
      */
     public int deleteUser(Integer userId){
+
+
         if(mapper.deleteUser(userId)>0){
             int rowCount=accountmapper.delete(userId);
             if(rowCount > 0){
@@ -93,7 +95,6 @@ public class UserService implements IUserSevice {
     }
 
     public int addUser(User user){
-        System.out.println(user.getUsername());
         String acname=user.getUsername();
         int rowCount = mapper.addUser(user);
         if( rowCount > 0){

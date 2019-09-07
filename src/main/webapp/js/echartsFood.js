@@ -28,32 +28,18 @@ layui.use('layer', function() {
 				option = {
 					//背景色
 					backgroundColor: '#e2e2e2',
-
-//					//标题配置
-//					title: {
-//						text: '个人审核报表',
-//						left: 'center',
-//						top: 20,
-//						textStyle: {
-//							color: '#393D49'
-//						}
-//					},
-
 					tooltip: {
 						trigger: 'item',
 						formatter: "{a} <br/>{b} : {c} ({d}%)"
 					},
-
 					visualMap: {
 						show: false,
-						min: 1,
-						max: 10,
+						min: 10,
+						max: 200,
 						inRange: {
-							//
 							colorLightness: [0.5, 0.9]
 						}
 					},
-
 					series: [{
 						name: '',
 						type: 'pie',
@@ -63,7 +49,6 @@ layui.use('layer', function() {
 							return a.value - b.value
 						}),
 						roseType: 'angle',
-
 						// 饼代表的名字
 						label: {
 							normal: {
@@ -72,7 +57,6 @@ layui.use('layer', function() {
 								}
 							}
 						},
-
 						// 饼线颜色
 						labelLine: {
 							normal: {
@@ -84,7 +68,6 @@ layui.use('layer', function() {
 								length2: 20
 							}
 						},
-
 						itemStyle: {
 							normal: {
 								// 饼的颜色
@@ -103,15 +86,35 @@ layui.use('layer', function() {
 					backgroundColor: '#e2e2e2',
 					xAxis: {
 						type: 'category',
+						boundaryGap : true,
+						axisLabel:{
+							interval:0,  //类目全显
+							rotate:-45  //顺时针旋转45度
+						},
 						data: dataBottom
 					},
 					yAxis: {
 						type: 'value'
 					},
-					series: [{
-						data: dataHight,
-						type: 'bar'
-					}]
+					series : [ {
+						name : '数量',
+						type : 'bar',
+						barWidth : '50%',
+						label: {
+							normal: {
+								show: true,
+								position: 'top',
+								textStyle: {
+									color: 'red'
+								}
+							}
+						},
+						data : dataHight,
+					} ]
+					// series: [{
+					// 	data: dataHight,
+					// 	type: 'bar'
+					// }]
 				};
 				// 使用刚指定的配置项和数据显示图表。
 				myChart.setOption(option);

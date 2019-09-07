@@ -58,7 +58,7 @@
                                     <div class="layui-col-md2">{{file.num}}份</div>
                                 </div>
                                 <div class="layui-card-body">
-                                    <img :src="'images/'+file.foodPath" width="270" height="180"/>>
+                                    <img :src="'images/'+file.foodPath" width="270" height="180"/>
                                 </div>
                                 <div>
                                     <a class='layui-btn layui-btn-mini layui-btn-info' @click="editDetailsState(file.detailsid)" href="javascript:;">

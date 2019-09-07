@@ -23,7 +23,7 @@
   </resultMap>
 
     <update id="updateOrdersStateByCode">
-      update orders set where orderstate = 0 where ordercode = #{value}
+      update orders set orderstate = 0 where ordercode like #{value} and orderstate = 1
     </update>
 
 
@@ -36,5 +36,22 @@
       </if>
     </where>
   </select>
+
+
+  <resultMap id="queryThreeDayOrderMap" type="OrderUtil">
+    <id column="count"/>
+    <result property="count" column="count"/>
+    <association property="orders" javaType="Orders">
+      <id property="orderid" column="orderid"/>
+      <result property="ordertime" column="ordertime"/>
+    </association>
+  </resultMap>
+    <select id="queryThreeDayOrder" resultMap="queryThreeDayOrderMap">
+      SELECT orderid,ordertime,COUNT(*) count
+      FROM orders
+      WHERE ordertime BETWEEN #{0} AND #{1}
+      GROUP BY ordertime
+
+    </select>
 
 </mapper>

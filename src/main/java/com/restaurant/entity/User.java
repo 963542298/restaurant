@@ -28,6 +28,16 @@ public class User implements Serializable {
 
     private Integer userstate;
 
+    private Integer role;
+
+    public Integer getRole() {
+        return role;
+    }
+
+    public void setRole(Integer role) {
+        this.role = role;
+    }
+
     public Integer getUserid() {
         return userid;
     }

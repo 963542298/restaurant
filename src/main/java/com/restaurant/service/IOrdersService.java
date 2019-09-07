@@ -1,11 +1,17 @@
 package com.restaurant.service;
 
 import com.github.pagehelper.PageInfo;
+import com.restaurant.entity.OrderUtil;
 import com.restaurant.entity.Orders;
 import com.restaurant.entity.WrapperUtil;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
 
+
+/**
+ * 订单service层接口
+ */
 public interface IOrdersService {
 
     /**
@@ -32,8 +38,14 @@ public interface IOrdersService {
 
     /**
      * 更改订单状态
-     * @param OrderCode
+     * @param orderCode
      * @return
      */
-    Integer updateOrdersStateByCode(String OrderCode);
+    Integer updateOrdersStateByCode(String orderCode);
+
+    /**
+     * 一段时间的订单数量
+     * @return
+     */
+    List<OrderUtil> queryThreeDayOrder(Integer type);
 }

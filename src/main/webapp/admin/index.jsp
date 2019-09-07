@@ -8,11 +8,13 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
 	<meta http-equiv="Cache-Control" content="no-siteapp" />
-	<link rel="stylesheet" href="./css/font.css">
-	<link rel="stylesheet" href="./css/xadmin.css">
+	<link rel="stylesheet" href="/restaurant/css/font.css">
+	<link rel="stylesheet" href="/restaurant/css/xadmin.css">
 	<!-- <link rel="stylesheet" href="./css/theme5.css"> -->
-	<script src="./lib/layui/layui.js" charset="utf-8"></script>
-	<script type="text/javascript" src="./js/xadmin.js"></script>
+	<script src="/restaurant/lib/layui/layui.js" charset="utf-8"></script>
+	<script type="text/javascript" src="/restaurant/js/xadmin.js"></script>
+	<script type="application/ecmascript" src="/restaurant/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/restaurant/js/index.js"></script>
 	<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
 	<script>
 		// 是否开启刷新记忆tab功能
@@ -20,12 +22,12 @@
 	</script>
 
 </head>
-<body >
+<body>
 
 <!-- 顶部开始 -->
 <div class="container">
 	<div class="logo">
-		<a href="./index.html">X-admin v2.2</a></div>
+		<a href="./index.jsp">后台管理</a></div>
 	<div class="left_open">
 		<a><i title="展开左侧栏" class="iconfont">&#xe699;</i></a>
 	</div>
@@ -37,9 +39,7 @@
 				<dd>
 					<a onclick="xadmin.open('个人信息','http://www.baidu.com')">个人信息</a></dd>
 				<dd>
-					<a onclick="xadmin.open('切换帐号','http://www.baidu.com')">切换帐号</a></dd>
-				<dd>
-					<a href="/restaurant/login.jsp">退出</a></dd>
+					<a id="out">退出</a></dd>
 			</dl>
 		</li>
 	</ul>
@@ -99,9 +99,9 @@
 							<cite>菜品统计</cite></a>
 					</li>
 					<li>
-						<a onclick="xadmin.add_tab('拆线图','echarts2.html')">
+						<a onclick="xadmin.add_tab('订单查询','/restaurant/admin/echartsOrders.jsp')">
 							<i class="iconfont">&#xe6a7;</i>
-							<cite>拆线图</cite></a>
+							<cite>订单查询</cite></a>
 					</li>
 				</ul>
 			</li>

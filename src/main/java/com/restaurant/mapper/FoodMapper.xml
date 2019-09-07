@@ -58,7 +58,7 @@
   </select>
 
     <select id="queryFoodNum" resultType="com.restaurant.entity.Statistics">
-      SELECT d.foodid,foodname,SUM(num)
+      SELECT d.foodid,foodname,SUM(num) num
       FROM details d
       LEFT JOIN food f
       ON f.foodId = d.foodId

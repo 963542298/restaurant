@@ -48,24 +48,24 @@ layui.use(['table','laypage','layer'], function() {
         //var checkStatus = table.checkStatus(obj.config.id);
         console.log(obj)
         if(obj.event === 'fle') {
-            if(data.userstate==1){
-                layer.confirm('确定将人员【'+data.username+'】锁定？',
+            if(data.role==1){
+                layer.confirm('确定将人员【'+data.username+'】降级为普通会员？',
                     {icon:3,title: '提示信息'},
                     function(index) {
                         $.ajax({
                             type:"post",
-                            url: "http://localhost:8080/restaurant/updateUserState.action?userState=0"+"&userId="+data.userid,
+                            url: "http://localhost:8080/restaurant/updateUserState.action?role=0"+"&userId="+data.userid,
                         });
                         layer.close(index);
                         ptable();
                     });
-            }else if(data.userstate==0){
-                layer.confirm('确定将人员【'+data.username+'】解锁？',
+            }else if(data.role==0){
+                layer.confirm('确定将人员【'+data.username+'】升级为超级会员？',
                     {icon:3,title: '提示信息'},
                     function(index) {
                         $.ajax({
                             type:"post",
-                            url: "http://localhost:8080/restaurant/unlockUserState.action?userState=1"+"&userId="+data.userid,
+                            url: "http://localhost:8080/restaurant/unlockUserState.action?role=1"+"&userId="+data.userid,
                         });
                         layer.close(index);
                         ptable();
@@ -143,7 +143,7 @@ layui.use(['table','laypage','layer'], function() {
                     //sort: true,
                     align: 'center'
                 },{
-                    field: 'userstate',
+                    field: 'role',
                     title: '状态',
                     //sort: true,
                     align: 'center'
@@ -165,13 +165,14 @@ layui.use(['table','laypage','layer'], function() {
                 theme:'#1E9FFF'},
 
             done:function(data){
-                $("[data-field='userstate']").children().each(function(){
+                $("[data-field='role']").children().each(function(){
                     if($(this).text()=='1'){
                         $(this).text("超级会员")
                     }else if($(this).text()=='0'){
                         $(this).text("普通用户")
                     }
                 });
+
                 $("[data-field='usersex']").children().each(function(){
                     if($(this).text()=='1'){
                         $(this).text("男")
@@ -179,7 +180,6 @@ layui.use(['table','laypage','layer'], function() {
                         $(this).text("女")
                     }
                 });
-
             }
         });
     }

@@ -39,7 +39,7 @@
     </ul>
 </div>
 
-<div id="app2" class="container">
+<div id="app2" class="container app2">
     <template v-for="types in typeList">
         <div class="section" :id="'st'+types.typeid">
             <template v-for="food in types.foodList">

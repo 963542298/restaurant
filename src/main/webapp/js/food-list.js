@@ -60,7 +60,7 @@ layui.use(['form', 'layer', 'laypage'], function() {
             app.datas=result.data.list;
             laypage.render({
                 elem: 'pageUtil'
-                ,count: result.total
+                ,count: result.data.total
                 ,curr:curr
                 ,limit:pageSize
                 ,layout: ['count', 'prev', 'page', 'next', 'limit', 'skip']

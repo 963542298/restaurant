@@ -8,15 +8,17 @@ import org.apache.ibatis.annotations.*;
 public interface UserMapper {
 
     /**
-     * 根据状态查询 0为未上桌 1为以上桌
+     * 根据状态查询
      * @return
      */
-    @Select("select * from user")
+    @Select("select * from user u,account a where  u.userid=a.userid")
     List<User> selectUser();
 
 
-    @Select("select * from user "
-            + "where userName like #{userName} ")
+    /* @Select("select * from user "
+             + "where userName like #{userName} ")
+     List<User> selectUserLike(@Param("userName") String userName);*/
+    @Select("SELECT * FROM USER u LEFT JOIN account a ON u.userid=a.userid WHERE u.username like #{userName}")
     List<User> selectUserLike(@Param("userName") String userName);
 
     /**
@@ -26,15 +28,16 @@ public interface UserMapper {
      */
     @Delete("delete from user where userId = #{value}")
     Integer deleteUser(Integer userId);
-
-    /**
+    /*
+     *//**
      * 更新状态
-     */
+     *//*
     @Update("update user set userState=#{userState} where userId=#{userId}")
-    int updateState(@Param("userState") Integer userState ,@Param("userId") Integer userId);
+    int updateState(@Param("userState") Integer userState ,@Param("userId") Integer userId);*/
 
-    @Update("update user set userState=#{userState} where userId=#{userId}")
-    int unlockUserState(@Param("userState") Integer userState ,@Param("userId") Integer userId);
+   /* @Update("update user set userState=#{userState} where userId=#{userId}")
+    int unlockUserState(@Param("userState") Integer userState ,@Param("userId") Integer userId);*/
+
 
     /**
      * 添加用户

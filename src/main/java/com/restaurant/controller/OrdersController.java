@@ -130,7 +130,23 @@ public class OrdersController {
         } else {
             resultUtil.setCode(1).setMessage("修改失败");
         }
+        return resultUtil;
+    }
 
+    /**
+     *
+     * @param type
+     * @return
+     */
+    @RequestMapping("/orders/queryOrder")
+    public @ResponseBody ResultUtil queryOrder(Integer type){
+        resultUtil.reset();
+        List<OrderUtil> orderUtilList = ordersService.queryThreeDayOrder(type);
+        if(orderUtilList != null && orderUtilList.size() > 0){
+            resultUtil.setCode(0).setMessage("查询成功").setData(orderUtilList);
+        } else {
+            resultUtil.setCode(1).setMessage("查询失败");
+        }
         return resultUtil;
     }
 }

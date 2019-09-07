@@ -31,4 +31,10 @@ public interface AccountMapper {
     //删除账号
     @Delete("delete from account where userid=#{userid}")
     Integer delete(@Param("userid") Integer userid);
+
+    @Update("update account set role=#{role} where userId=#{userId}")
+    int unlockUserState (@Param("role") Integer userState ,@Param("userId") Integer userId);
+
+    @Update("update account set role=#{role} where userId=#{userId}")
+    int updateState (@Param("role") Integer userState ,@Param("userId") Integer userId);
 }

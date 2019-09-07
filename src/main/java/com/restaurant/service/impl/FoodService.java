@@ -22,8 +22,6 @@ public class FoodService implements IFoodService {
      * 查询菜品
      */
     public PageInfo<Food> showAllFood(String foodname, Integer foodstate, Type type, Integer page, Integer pageSize){
-        page = page == null ? 1 : page;
-        pageSize = pageSize == null ? 10 : pageSize;
         PageHelper.startPage(page, pageSize);
         String foodName = foodname;
         if(foodname != null && foodname != ""){

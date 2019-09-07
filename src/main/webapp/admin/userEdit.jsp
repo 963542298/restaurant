@@ -34,14 +34,7 @@
                 <input type="text" id="userName" name="userName" required="" lay-verify="required" autocomplete="off" class="layui-input aname">
             </div>
         </div>
-        <div class="layui-form-item">
-            <label for="username" class="layui-form-label">
-                <span class="x-red">*</span>年龄
-            </label>
-            <div class="layui-input-inline layui-col-md12">
-                <input type="text" id="userAge" name="userAge" required="" lay-verify="required" autocomplete="off" class="layui-input">
-            </div>
-        </div>
+
         <div class="layui-form-item">
             <label  class="layui-form-label">
                 <span class="x-red">*</span>电话

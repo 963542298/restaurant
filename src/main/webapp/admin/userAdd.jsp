@@ -36,23 +36,12 @@
             </div>
         </div>
         <div class="layui-form-item">
-            <label for="username" class="layui-form-label">
-                <span class="x-red">*</span>年龄
-            </label>
-            <div class="layui-input-inline layui-col-md12">
-                <input type="text" id="userAge" name="userAge" required="" lay-verify="required" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
             <label  class="layui-form-label">
                 <span class="x-red">*</span>电话
             </label>
             <div class="layui-input-inline">
                 <input type="text" id="userPhone" name="userPhone" required="" lay-verify="phone"
                        autocomplete="off" class="layui-input phone">
-            </div>
-            <div class="layui-form-mid layui-word-aux">
-                请确保唯一
             </div>
         </div>
         <div class="layui-form-item">
