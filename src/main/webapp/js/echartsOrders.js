@@ -45,6 +45,7 @@ layui.use(['layer','form'], function() {
                     dataBottom = [];
                     // 柱状图纵轴
                     dataHight = [];
+                    console.log(result.data)
                     for (var i=0;i<orderUtils.length;i++) {
 
                         var orderUtil = orderUtils[i];
