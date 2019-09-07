@@ -15,6 +15,9 @@ import java.util.List;
 
 @CrossOrigin(origins = {"*", "null"})
 @Controller
+/**
+ * 菜品类型控制器
+ */
 public class TypeController {
 
     @Autowired
