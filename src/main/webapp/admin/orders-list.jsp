@@ -33,7 +33,7 @@
     <blockquote class="layui-elem-quote news_search">
         <div class="layui-inline">
             <div class="layui-input-inline">
-                <input id="ordercode" type="text" id="ordercode" placeholder="请输入订单编号" class="layui-input search_input">
+                <input id="ordercode" type="text" id="ordercode" placeholder="请输入订单编号" class="layui-input search_input" maxlength="10">
             </div>
             <button id="query" class="layui-btn search_btn">查询</button>
 

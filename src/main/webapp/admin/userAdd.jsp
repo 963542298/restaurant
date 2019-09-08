@@ -32,7 +32,7 @@
                 <span class="x-red">*</span>姓名
             </label>
             <div class="layui-input-inline layui-col-md12">
-                <input type="text" id="userName" name="userName" required="" lay-verify="required" autocomplete="off" class="layui-input aname">
+                <input type="text" id="userName" name="userName" required="" lay-verify="required" autocomplete="off" class="layui-input aname" maxlength="5">
             </div>
         </div>
         <div class="layui-form-item">

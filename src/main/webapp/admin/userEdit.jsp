@@ -31,7 +31,7 @@
                 <span class="x-red">*</span>姓名
             </label>
             <div class="layui-input-inline layui-col-md12">
-                <input type="text" id="userName" name="userName" required="" lay-verify="required" autocomplete="off" class="layui-input aname">
+                <input type="text" id="userName" name="userName" required="" lay-verify="required" autocomplete="off" class="layui-input aname" maxlength="5">
             </div>
         </div>
 
@@ -43,17 +43,14 @@
                 <input type="text" id="userPhone" name="userPhone" required="" lay-verify="phone"
                        autocomplete="off" class="layui-input phone">
             </div>
-            <div class="layui-form-mid layui-word-aux">
-                请确保唯一
-            </div>
         </div>
         <div class="layui-form-item">
             <label for="username" class="layui-form-label">
                 <span class="x-red">*</span>性别
             </label>
             <div class="layui-input-block">
-                <input type="radio" name="sex" value="1" title="男" checked="">
-                <input type="radio" name="sex" value="2" title="女">
+                <input type="radio" name="sex" value="1" title="男" checked="checked">
+                <input type="radio" name="sex" value="2" title="女" >
             </div>
         </div>
         <div class="layui-inline">
