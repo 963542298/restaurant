@@ -17,11 +17,16 @@
     <link rel="stylesheet" type="text/css" href="css/swiper.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="lib/layui/css/layui.css">
+<%--    <style>--%>
+<%--        .nav-lf{ position:absolute; left:0; width:1rem; background-color:#E5E5E5; font-size:0.15rem; text-align:center;}--%>
+<%--    </style>--%>
 </head>
 
 <body>
 
 <!-- 头图片 -->
+
 <div class="swiper-container">
     <div class="swiper-wrapper">
         <div class="swiper-slide"><img src="images/index/shop_1.jpg"></div>
@@ -30,16 +35,25 @@
     </div>
 </div>
 
+
+
 <!-- 分类 -->
 <div id="app" class="nav-lf">
     <ul id="nav">
         <template v-for="type in list">
             <li><a :href="'#st'+type.typeid">{{type.typename}}</a><b></b></li>
+<%--            <div v-if="type.typeid == 1">--%>
+<%--                <li class="current"><a :href="'#st'+type.typeid">{{type.typename}}</a><b></b></li>--%>
+<%--            </div>--%>
+<%--            <div v-else>--%>
+<%--                <li><a :href="'#st'+type.typeid">{{type.typename}}</a><b></b></li>--%>
+<%--            </div>--%>
         </template>
     </ul>
 </div>
 
-<div id="app2" class="container">
+<%--   --%>
+<div id="app2"  class="container">
     <template v-for="types in typeList">
         <div class="section" :id="'st'+types.typeid">
             <template v-for="food in types.foodList">
@@ -52,20 +66,27 @@
                     </div>
                     <div class="lt-rt">
                         <input type="button" class="minus" onclick="minus(this)"  value="-">
-                        <p class="result" style="font-size: small">0</p>
+                        <p class="result" style="font-size: larger">0</p>
                         <input type="button" class="add" onclick="add(this)" value="+">
                     </div>
                 </div>
             </template>
         </div>
     </template>
+    <div class="prt-lt" style="height: 0.45rem;">
+
+    </div>
 </div>
 
-<footer>
+
+<footer class="layui-footer">
+    <div class="ft-lt"></div>
     <div class="ft-rt">
         <p id="ok">选好了</p>
     </div>
 </footer>
+
+
 
 <script type="text/javascript" src="js/vue.min.js"></script>
 <script type="text/javascript" src="js/jquery.min.js"></script>
@@ -100,7 +121,7 @@
     });
 
     $(function() {
-        //$('#nav').onePageNav();
+        $('#nav').onePageNav();
     });
 </script>
 <script type="text/javascript" src="js/waypoints.min.js"></script>

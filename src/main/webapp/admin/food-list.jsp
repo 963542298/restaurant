@@ -32,7 +32,7 @@
                         <div class="layui-inline">
                             <label class="layui-form-label">菜品名</label>
                             <div class="layui-inline layui-show-xs-block">
-                                <input class="layui-input foodName"  autocomplete="off" placeholder="请输入菜品名" name="foodName">
+                                <input class="layui-input foodName"  autocomplete="off" placeholder="请输入菜品名" name="foodName" maxlength="12">
                             </div>
                         </div>
                         <div class="layui-inline">

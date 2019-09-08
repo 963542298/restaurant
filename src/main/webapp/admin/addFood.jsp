@@ -25,7 +25,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">菜品名</label>
         <div class="layui-input-block">
-            <input type="text" class="layui-input foodName" style="width: 212px" placeholder="请输入菜品名">
+            <input type="text" class="layui-input foodName" style="width: 212px" placeholder="请输入菜品名" maxlength="12">
         </div>
     </div>
     <div class="layui-form-item">

@@ -41,11 +41,11 @@
 		<form class="layui-form" action="login.action" method="post">
 			<div>
 				<i class="layui-icon layui-icon-username admin-icon admin-icon-username"></i>
-				<input type="text" name="accountname" placeholder="请输入帐号" lay-verify="required" autocomplete="off" class="layui-input admin-input admin-input-username">
+				<input type="text" name="accountname" placeholder="请输入帐号" lay-verify="required" autocomplete="off" class="layui-input admin-input admin-input-username" maxlength="25">
 			</div>
 			<div>
 				<i class="layui-icon layui-icon-password admin-icon admin-icon-password"></i>
-				<input type="password" name="accountpwd" lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input admin-input">
+				<input type="password" name="accountpwd" lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input admin-input" maxlength="25">
 			</div>
 
 			<div class="layui-form-item">

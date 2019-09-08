@@ -29,7 +29,7 @@
 <script type="text/html" id="toolbarDemo">
     姓名：
     <div class="layui-inline">
-        <input class="layui-input" name="id" id="demoReload" autocomplete="off">
+        <input class="layui-input" name="id" id="demoReload" autocomplete="off" maxlength="5">
     </div>
     <button id="btn1" type="button" class="layui-btn layui-btn-normal
 	  			layui-btn-radius" data-type="reload" lay-event="select">搜索</button>

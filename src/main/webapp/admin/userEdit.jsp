@@ -41,7 +41,7 @@
             </label>
             <div class="layui-input-inline">
                 <input type="text" id="userPhone" name="userPhone" required="" lay-verify="phone"
-                       autocomplete="off" class="layui-input phone">
+                       autocomplete="off" class="layui-input phone" maxlength="5">
             </div>
         </div>
         <div class="layui-form-item">
