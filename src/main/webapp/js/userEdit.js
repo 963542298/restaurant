@@ -81,7 +81,6 @@ layui.use(['form','laydate', 'layer','jquery'], function() {
             "usersex": userSex,
             "userstate": 0
         }
-        console.log(jsonObject);
         $.post("http://localhost:8080/restaurant/editUser.action",jsonObject
             , function(result){
                 if(result.code==0){
@@ -97,15 +96,17 @@ layui.use(['form','laydate', 'layer','jquery'], function() {
     });
 
     $.post("http://localhost:8080/restaurant/findUserById.action" ,{"userid":getQueryString("userid")},function (result) {
-        console.log(result.data)
         if(result.code == 0){//请求正常
             var user = result.data;
             $("#userName").val(user.username);
             $("#userAge").val(user.userage);
-            $("input[name='sex'][value="+user.usersex+"]").attr("checked",true);
+            // $("input[name='sex'][value="+user.usersex+"]").attr("checked",true);
+            // $('.layui-form-radio').eq(user.usersex-1).click();
+            $('input:radio').eq(user.usersex-1).prop('checked', true);
             $(".userBirthday").val(user.userbirthday);
             $("#userPhone").val(user.userphone);
             $("#userAddress").val(user.useraddress);
+            form.render();
         }else{
             layer.open({
                 type: 1,

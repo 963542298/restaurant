@@ -17,6 +17,7 @@ layui.use(['form', 'layer'], function() {
 
     //加载菜品类型
     function loadType(){
+        //192.168.2.202
         $.post("http://192.168.2.202:8080/restaurant/type/showAllType.action",function(result){
             if(result.code == 0){
                 app.list = result.data;
@@ -69,7 +70,6 @@ layui.use(['form', 'layer'], function() {
         $.post("http://192.168.2.202:8080/restaurant/orders/addOrders.action",
             {"foodList":foodList.toString(),"integerList":integerList.toString(),"id":tableCode}
             ,function (result) {
-            console.log(tableCode)
                 if(result.code == 0){
                     layer.msg("下单成功");
                 } else {

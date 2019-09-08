@@ -62,10 +62,6 @@ layui.use(['form','laydate', 'layer','jquery'], function() {
         return returnAge;//返回周岁年龄
     }
 
-
-
-
-
     $("button[lay-filter='userAdd']").click(function () {
         var userName = $("#userName").val();
 
@@ -88,7 +84,6 @@ layui.use(['form','laydate', 'layer','jquery'], function() {
         $.post("http://localhost:8080/restaurant/addUser.action",jsonObject
             , function(result){
                 if(result.code==0){
-                    console.log(result);
 //					layer.closeAll("iframe");
                     setTimeout(function(){//设置定时器
                         parent.location.reload(true);//刷新父级页面
